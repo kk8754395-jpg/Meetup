@@ -7,8 +7,38 @@ class MeetupApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Meetup',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomePage(),
+      home: LoginPage(), 
+    );
+  }
+}
+
+class LoginPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Meetup-এ স্বাগতম', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blue)),
+            SizedBox(height: 30),
+            TextField(decoration: InputDecoration(border: OutlineInputBorder(), labelText: 'আপনার নাম')),
+            SizedBox(height: 15),
+            TextField(decoration: InputDecoration(border: OutlineInputBorder(), labelText: 'মোবাইল নম্বর'), keyboardType: TextInputType.phone),
+            SizedBox(height: 25),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              },
+              child: Text('একাউন্ট খুলুন'),
+              style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 50)),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -17,55 +47,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Meetup', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
-        backgroundColor: Colors.white,
-        elevation: 1,
-        actions: [
-          IconButton(icon: Icon(Icons.video_call, color: Colors.black), onPressed: () {}),
-          IconButton(icon: Icon(Icons.chat_bubble_outline, color: Colors.black), onPressed: () {}),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // প্রোফাইল ও কভার সেকশন (নমুনা)
-            Container(
-              height: 200,
-              color: Colors.blue[100],
-              child: Center(child: Icon(Icons.camera_alt, size: 50, color: Colors.blue)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  CircleAvatar(radius: 30, backgroundColor: Colors.blue),
-                  SizedBox(width: 10),
-                  Text('Kishore', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Divider(),
-            // পোস্ট ফিড (নমুনা)
-            ListTile(
-              leading: CircleAvatar(backgroundColor: Colors.grey),
-              title: Text('New Video Post'),
-              subtitle: Text('2 minutes ago'),
-            ),
-            Container(height: 250, color: Colors.grey[200], child: Center(child: Icon(Icons.play_circle_fill, size: 60))),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Friends'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Alerts'),
-          BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Menu'),
-        ],
-      ),
+      appBar: AppBar(title: Text('Meetup Feed')),
+      body: Center(child: Text('স্বাগতম! আপনি সফলভাবে প্রবেশ করেছেন।')),
     );
   }
 }
